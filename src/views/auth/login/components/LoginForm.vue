@@ -44,8 +44,10 @@
 
 <script lang="ts" setup>
 import {ref} from 'vue'
-import router from "@/router";
 import {useAuthStore} from '@/store/auth'
+import router from "@/router";
+import apiAuth from "@/infra/api/auth/Auth"
+import axios from "axios";
 
 const passwordShow = ref(false)
 const isLoading = ref(false)
@@ -57,17 +59,28 @@ function emitLoginLoading() {
     emit('login-loading', isLoading.value)
 }
 
-function login() {
-    isLoading.value = true;
-    emitLoginLoading()
-    auth.setAuthUser(
-        'Lucas',
-        'lucas@gmail.com',
-        'https://randomuser.me/api/portraits/men/78.jpg'
-    )
-    auth.setAuthUserToken('asda')
-    router.push({name: 'home'})
-    isLoading.value = false;
-    emitLoginLoading()
+async function login() {
+    try {
+        isLoading.value = true;
+        emitLoginLoading()
+        const data = await apiAuth.login('aaa', 'sdfsd')
+        auth.setAuthUser(data.email, data.name, data.avatar)
+        auth.setAuthUserToken(data.token)
+
+        auth.setAuthUser(
+            data.name,
+            data.email,
+            data.avatar
+        )
+        auth.setAuthUserToken('asdaaaaaa')
+        await router.push({name: 'home'})
+    } catch (error: unknown) {
+        if (!axios.isAxiosError(error)) {
+            throw error
+        }
+    } finally {
+        isLoading.value = false;
+        emitLoginLoading()
+    }
 }
 </script>
