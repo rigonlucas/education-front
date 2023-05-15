@@ -1,12 +1,12 @@
 <template>
-  <v-form>
+  <v-form :disabled="isLoading">
     <v-row
       class="ml-10 mr-10"
       no-gutters
     >
       <v-col cols="12">
         <v-text-field
-          :model-value="auth.getUser.email ?? ''"
+          :model-value="auth?.getUser?.email ?? ''"
           density="compact"
           label="Email"
           prepend-inner-icon="mdi-email"
@@ -28,6 +28,7 @@
       </v-col>
       <v-col cols="12">
         <v-btn
+          :disabled="isLoading"
           block
           class="mt-3"
           color="primary"
@@ -47,19 +48,26 @@ import router from "@/router";
 import {useAuthStore} from '@/store/auth'
 
 const passwordShow = ref(false)
-
+const isLoading = ref(false)
 const auth = useAuthStore()
 
-console.log(auth.getUser)
-console.log(auth.getUser?.email)
+const emit = defineEmits(['login-loading'])
+
+function emitLoginLoading() {
+    emit('login-loading', isLoading.value)
+}
 
 function login() {
+    isLoading.value = true;
+    emitLoginLoading()
     auth.setAuthUser(
         'Lucas',
         'lucas@gmail.com',
-        'https://static.vecteezy.com/system/resources/previews/006/487/917/original/man-avatar-icon-free-vector.jpg'
+        'https://randomuser.me/api/portraits/men/78.jpg'
     )
     auth.setAuthUserToken('asda')
     router.push({name: 'home'})
+    isLoading.value = false;
+    emitLoginLoading()
 }
 </script>

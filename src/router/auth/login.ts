@@ -1,3 +1,5 @@
+import {LoginRoutesEnum} from "@/core/modules/auth/enums/AuthRoutesEnum";
+
 const routes = [
     {
         path: '/auth',
@@ -5,7 +7,7 @@ const routes = [
         children: [
             {
                 path: 'login',
-                name: 'auth.login',
+                name: LoginRoutesEnum.login,
                 component: () => import(/* webpackChunkName: "login" */ '@/views/auth/login/LoginView.vue'),
             },
         ],

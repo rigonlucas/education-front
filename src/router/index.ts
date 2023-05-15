@@ -1,27 +1,14 @@
 // Composables
 import {createRouter, createWebHistory, RouteRecordNormalized} from 'vue-router'
 import login from "@/router/auth/login";
+import project from "@/router/project/project"
+import home from "@/router/home"
 import {useAuthStore} from "@/store/auth";
 
 const routes = [
-    {
-        path: '/',
-        component: () => import('@/layouts/default/Default.vue'),
-        children: [
-            {
-                path: '',
-                name: 'home',
-                // route level code-splitting
-                // this generates a separate chunk (about.[hash].js) for this route
-                // which is lazy-loaded when the route is visited.
-                component: () => import(/* webpackChunkName: "home" */ '@/views/Home.vue'),
-            },
-        ],
-        meta: {
-            isProtected: true,
-        },
-    },
-    ...login
+    ...home,
+    ...login,
+    ...project
 ]
 
 function getMetaAttribute(attribute: string, routes: RouteRecordNormalized[]) {

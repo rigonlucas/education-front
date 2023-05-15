@@ -5,6 +5,7 @@
       cols="12"
     >
       <v-avatar
+        v-if="auth.getUser?.name"
         size="100"
       >
         <v-img
@@ -21,6 +22,10 @@
           <h1>{{ auth.getUserNameInicials }}</h1>
         </v-avatar>
       </v-avatar>
+      <div
+        v-else
+        class="mt-5 mb-5"
+      />
     </v-col>
   </v-row>
 </template>

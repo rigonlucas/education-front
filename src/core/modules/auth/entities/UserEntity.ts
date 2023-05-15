@@ -1,4 +1,6 @@
-export class UserEntity {
+import {UserInterface} from "@/core/modules/auth/interfaces/UserInterface";
+
+export class UserEntity implements UserInterface {
 
     constructor(
     public readonly name: string,

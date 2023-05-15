@@ -46,7 +46,7 @@ const darkTheme: ThemeDefinition = {
 }
 export default createVuetify({
     theme: {
-        defaultTheme: 'light',
+        defaultTheme: 'dark',
         themes: {
             light: lightTheme,
             dark: darkTheme

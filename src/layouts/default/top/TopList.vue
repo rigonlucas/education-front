@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar-title>GPP - Gestão de projetos pedagógicos</v-app-bar-title>
+  <v-app-bar-title>GPP</v-app-bar-title>
 
   <v-spacer />
 

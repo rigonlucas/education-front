@@ -10,13 +10,14 @@
   </v-app-bar>
   <v-navigation-drawer
     v-model="stateLeftSidePanel"
-    elevation="24"
+    elevation="0"
     temporary
   >
     <OptionsLeftList />
   </v-navigation-drawer>
   <v-navigation-drawer
     v-model="stateRightSidePanel"
+    elevation="0"
     location="right"
     temporary
   >
